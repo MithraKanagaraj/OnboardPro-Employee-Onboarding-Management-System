@@ -1,0 +1,9 @@
+@model ChecklistTemplateFormViewModel
+<input asp-for="Id" type="hidden" />
+<div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+<div class="mb-3"><label asp-for="Name" class="form-label"></label><input asp-for="Name" class="form-control" /><span asp-validation-for="Name" class="text-danger"></span></div>
+<div class="mb-3"><label asp-for="Description" class="form-label"></label><textarea asp-for="Description" class="form-control" rows="3"></textarea><span asp-validation-for="Description" class="text-danger"></span></div>
+<div class="mb-3"><label asp-for="RoleId" class="form-label"></label><select asp-for="RoleId" asp-items="Model.Roles" class="form-select"><option value="">Select a role</option></select><span asp-validation-for="RoleId" class="text-danger"></span></div>
+<div class="mb-3"><label asp-for="SelectedTaskDefinitionIds" class="form-label"></label><select asp-for="SelectedTaskDefinitionIds" asp-items="Model.TaskDefinitions" class="form-select" size="8"></select><span asp-validation-for="SelectedTaskDefinitionIds" class="text-danger"></span><div class="form-text">Use Ctrl (Windows) or Command (Mac) to select multiple task definitions.</div></div>
+<div class="form-check mb-3"><input asp-for="IsActive" class="form-check-input" /><label asp-for="IsActive" class="form-check-label">Template is active and available to assign</label></div>
+<button class="btn btn-primary" type="submit">Save template</button> <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>

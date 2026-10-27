@@ -1,0 +1,9 @@
+@model IReadOnlyList<ChecklistTemplate>
+@{ ViewData["Title"] = "Checklist templates"; }
+<div class="d-flex justify-content-between align-items-center mb-3"><div><h1 class="h2 mb-1">Checklist templates</h1><p class="text-secondary mb-0">Role-based reusable onboarding plans.</p></div><div><a class="btn btn-outline-primary" asp-action="Assign">Assign template</a> <a class="btn btn-primary" asp-action="Create">New template</a></div></div>
+<div class="card">
+@if (Model.Count == 0) { <div class="card-body text-center py-5"><h2 class="h5">No templates yet</h2><p class="text-secondary">Create a role-based template to start building onboarding plans.</p></div> }
+else { <div class="table-responsive"><table class="table table-hover align-middle mb-0"><thead><tr><th>Name</th><th>Role</th><th>Tasks</th><th>Status</th><th></th></tr></thead><tbody>
+@foreach (var template in Model) { <tr><td><strong>@template.Name</strong><div class="small text-secondary">@template.Description</div></td><td>@template.Role.Name</td><td>@template.TemplateTasks.Count</td><td>@(template.IsActive ? "Active" : "Inactive")</td><td class="text-end text-nowrap"><a asp-action="Details" asp-route-id="@template.Id">Details</a> · <a asp-action="Edit" asp-route-id="@template.Id">Edit</a> · <a asp-action="Delete" asp-route-id="@template.Id" class="text-danger">Delete</a></td></tr> }
+</tbody></table></div> }
+</div>

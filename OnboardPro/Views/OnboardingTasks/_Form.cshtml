@@ -1,0 +1,9 @@
+@model OnboardingTaskFormViewModel
+<input asp-for="Id" type="hidden" />
+<div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+<div class="mb-3"><label asp-for="EmployeeId" class="form-label"></label><select asp-for="EmployeeId" asp-items="Model.Employees" class="form-select"><option value="">Select employee</option></select><span asp-validation-for="EmployeeId" class="text-danger"></span></div>
+<div class="mb-3"><label asp-for="TitleSnapshot" class="form-label"></label><input asp-for="TitleSnapshot" class="form-control" /><span asp-validation-for="TitleSnapshot" class="text-danger"></span></div>
+<div class="mb-3"><label asp-for="DescriptionSnapshot" class="form-label"></label><textarea asp-for="DescriptionSnapshot" class="form-control"></textarea><span asp-validation-for="DescriptionSnapshot" class="text-danger"></span></div>
+<div class="row"><div class="col-md-4 mb-3"><label asp-for="CategorySnapshot" class="form-label"></label><input asp-for="CategorySnapshot" class="form-control" /><span asp-validation-for="CategorySnapshot" class="text-danger"></span></div><div class="col-md-4 mb-3"><label asp-for="DueDate" class="form-label"></label><input asp-for="DueDate" class="form-control" type="date" /><span asp-validation-for="DueDate" class="text-danger"></span></div><div class="col-md-4 mb-3"><label asp-for="Status" class="form-label"></label><select asp-for="Status" asp-items="Html.GetEnumSelectList<OnboardingTaskStatus>()" class="form-select"></select></div></div>
+<div class="form-check mb-3"><input asp-for="IsRequiredSnapshot" class="form-check-input" /><label asp-for="IsRequiredSnapshot" class="form-check-label"></label></div>
+<button class="btn btn-primary" type="submit">Save task</button> <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>

@@ -1,0 +1,4 @@
+@model Asset
+@{ ViewData["Title"] = "Asset details"; var active = Model.Allocations.FirstOrDefault(allocation => allocation.ReturnedOn is null); }
+<h1 class="h2">Asset details</h1><div class="card"><dl class="row card-body mb-0"><dt class="col-sm-3">Name</dt><dd class="col-sm-9">@Model.Name</dd><dt class="col-sm-3">Category</dt><dd class="col-sm-9">@Model.Category</dd><dt class="col-sm-3">Serial number</dt><dd class="col-sm-9">@Model.SerialNumber</dd><dt class="col-sm-3">Notes</dt><dd class="col-sm-9">@Model.Notes</dd><dt class="col-sm-3">Current allocation</dt><dd class="col-sm-9">@(active?.Employee?.FullName ?? "Available")</dd><dt class="col-sm-3">Retired</dt><dd class="col-sm-9">@(Model.IsRetired ? "Yes" : "No")</dd></dl></div>
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary mt-3">Edit</a> <a asp-action="Index" class="btn btn-outline-secondary mt-3">Back</a>

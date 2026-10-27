@@ -1,0 +1,11 @@
+@model Employee
+@{
+    ViewData["Title"] = "Delete employee";
+}
+<h1 class="h2">Delete employee</h1>
+<div class="alert alert-warning">Employee deletion is blocked while the employee has a linked account, uploaded documents, asset allocation history, or buddy assignments. Onboarding tasks and checklists are removed with the employee.</div>
+<div class="card mb-3"><div class="card-body"><h2 class="h5">@Model.FullName</h2><div>@Model.Email · @Model.JobTitle</div></div></div>
+<form asp-action="Delete" asp-route-id="@Model.Id" method="post">
+    <button class="btn btn-danger" type="submit">Delete employee</button>
+    <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+</form>

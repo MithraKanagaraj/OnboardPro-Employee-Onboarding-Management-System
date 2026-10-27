@@ -1,0 +1,11 @@
+@model DocumentReviewViewModel
+@{ ViewData["Title"] = "Review document"; var document = ViewBag.Document as Document; }
+<h1 class="h2 mb-3">Review document</h1>
+@if (document is not null) { <div class="card mb-3"><div class="card-body"><strong>@document.Employee.FullName · @document.DocumentType</strong><div><a asp-action="Download" asp-route-id="@document.Id">@document.OriginalFileName</a></div></div></div> }
+<div class="card"><div class="card-body"><form asp-action="Review" method="post">
+    <input asp-for="Id" type="hidden" /><div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+    <div class="mb-3"><label asp-for="Status" class="form-label"></label><select asp-for="Status" asp-items="Html.GetEnumSelectList<DocumentStatus>()" class="form-select"></select><span asp-validation-for="Status" class="text-danger"></span></div>
+    <div class="mb-3"><label asp-for="ReviewNote" class="form-label"></label><textarea asp-for="ReviewNote" class="form-control" rows="3"></textarea><span asp-validation-for="ReviewNote" class="text-danger"></span></div>
+    <button class="btn btn-primary" type="submit">Save review</button> <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+</form></div></div>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

@@ -1,0 +1,4 @@
+@model AssetAllocationFormViewModel
+@{ ViewData["Title"] = "Allocate asset"; }
+<h1 class="h2 mb-3">Allocate asset</h1><div class="card"><div class="card-body"><form asp-action="Allocate" method="post"><partial name="_AllocationForm" model="Model" /></form></div></div>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

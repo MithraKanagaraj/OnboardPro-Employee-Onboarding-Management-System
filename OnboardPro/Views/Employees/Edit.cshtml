@@ -1,0 +1,11 @@
+@model EmployeeFormViewModel
+@{
+    ViewData["Title"] = "Edit employee";
+}
+<h1 class="h2 mb-3">Edit employee</h1>
+<div class="card"><div class="card-body">
+<form asp-action="Edit" asp-route-id="@Model.Id" method="post">
+    <partial name="_Form" model="Model" />
+</form>
+</div></div>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

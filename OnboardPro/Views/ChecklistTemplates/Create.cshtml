@@ -1,0 +1,4 @@
+@model ChecklistTemplateFormViewModel
+@{ ViewData["Title"] = "Create checklist template"; }
+<h1 class="h2 mb-3">Create checklist template</h1><div class="card"><div class="card-body"><form asp-action="Create" method="post"><partial name="_Form" model="Model" /></form></div></div>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

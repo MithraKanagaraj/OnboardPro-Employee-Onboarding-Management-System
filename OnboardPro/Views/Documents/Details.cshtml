@@ -1,0 +1,5 @@
+@model Document
+@{ ViewData["Title"] = "Document details"; }
+<h1 class="h2">Document details</h1><div class="card mb-3"><dl class="row card-body mb-0">
+<dt class="col-sm-3">Employee</dt><dd class="col-sm-9">@Model.Employee.FullName</dd><dt class="col-sm-3">Type</dt><dd class="col-sm-9">@Model.DocumentType</dd><dt class="col-sm-3">File</dt><dd class="col-sm-9">@Model.OriginalFileName (@(Model.SizeBytes / 1024) KB)</dd><dt class="col-sm-3">Uploaded</dt><dd class="col-sm-9">@Model.UploadedAtUtc.ToLocalTime().ToString("g")</dd><dt class="col-sm-3">Status</dt><dd class="col-sm-9">@Model.Status</dd><dt class="col-sm-3">Review note</dt><dd class="col-sm-9">@Model.ReviewNote</dd>
+</dl></div><a asp-action="Download" asp-route-id="@Model.Id" class="btn btn-primary">Download</a> <a asp-action="Index" class="btn btn-outline-secondary">Back</a>

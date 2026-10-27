@@ -1,0 +1,7 @@
+@model ChecklistTemplate
+@{ ViewData["Title"] = "Template details"; }
+<div class="d-flex justify-content-between mb-3"><h1 class="h2">Template details</h1><a class="btn btn-primary" asp-action="Assign">Assign to employee</a></div>
+<div class="card mb-3"><dl class="row card-body mb-0"><dt class="col-sm-3">Template</dt><dd class="col-sm-9">@Model.Name</dd><dt class="col-sm-3">Role</dt><dd class="col-sm-9">@Model.Role.Name</dd><dt class="col-sm-3">Description</dt><dd class="col-sm-9">@Model.Description</dd><dt class="col-sm-3">Active</dt><dd class="col-sm-9">@(Model.IsActive ? "Yes" : "No")</dd></dl></div>
+<h2 class="h5">Reusable tasks</h2>
+@if (Model.TemplateTasks.Count == 0) { <p class="text-secondary">No tasks are attached to this template.</p> } else { <ol>@foreach (var link in Model.TemplateTasks.OrderBy(link => link.SortOrder)) { <li class="mb-2"><strong>@link.TaskDefinition.Title</strong> <span class="text-secondary">(@link.TaskDefinition.Category)</span><div class="small">@link.TaskDefinition.Description</div></li> }</ol> }
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-outline-primary">Edit</a> <a asp-action="Index" class="btn btn-outline-secondary">Back</a>

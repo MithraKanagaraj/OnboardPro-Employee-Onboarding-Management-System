@@ -1,0 +1,6 @@
+@model BuddyAssignmentFormViewModel
+<input asp-for="Id" type="hidden" /><div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+<div class="mb-3"><label asp-for="EmployeeId" class="form-label"></label><select asp-for="EmployeeId" asp-items="Model.Joiners" class="form-select"><option value="">Select a new joiner</option></select><span asp-validation-for="EmployeeId" class="text-danger"></span></div>
+<div class="mb-3"><label asp-for="BuddyEmployeeId" class="form-label"></label><select asp-for="BuddyEmployeeId" asp-items="Model.BuddyEmployees" class="form-select"><option value="">Select a buddy</option></select><span asp-validation-for="BuddyEmployeeId" class="text-danger"></span></div>
+<div class="row"><div class="col-md-6 mb-3"><label asp-for="AssignedOn" class="form-label"></label><input asp-for="AssignedOn" type="date" class="form-control" /><span asp-validation-for="AssignedOn" class="text-danger"></span></div><div class="col-md-6 mb-3"><label asp-for="EndedOn" class="form-label"></label><input asp-for="EndedOn" type="date" class="form-control" /><span asp-validation-for="EndedOn" class="text-danger"></span></div></div>
+<button class="btn btn-primary" type="submit">Save buddy assignment</button> <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>

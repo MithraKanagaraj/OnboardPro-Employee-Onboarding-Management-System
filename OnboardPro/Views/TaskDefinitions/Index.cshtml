@@ -1,0 +1,11 @@
+@model IReadOnlyList<TaskDefinition>
+@{
+    ViewData["Title"] = "Task library";
+}
+<div class="d-flex justify-content-between align-items-center mb-3"><div><h1 class="h2 mb-1">Task definition library</h1><p class="text-secondary mb-0">Reusable task descriptions for checklist templates.</p></div><a class="btn btn-primary" asp-action="Create">Add task definition</a></div>
+<div class="card">
+    @if (Model.Count == 0) { <div class="card-body text-center py-5"><h2 class="h5">No task definitions</h2><p class="text-secondary">Create reusable tasks, then add them to a template.</p></div> }
+    else { <div class="table-responsive"><table class="table table-hover align-middle mb-0"><thead><tr><th>Task</th><th>Category</th><th>Due</th><th>Required</th><th></th></tr></thead><tbody>
+    @foreach (var task in Model) { <tr><td><strong>@task.Title</strong><div class="small text-secondary">@task.Description</div></td><td>@task.Category</td><td>@task.DueOffsetDays days after start</td><td>@(task.IsRequired ? "Yes" : "No")</td><td class="text-end text-nowrap"><a asp-action="Details" asp-route-id="@task.Id">Details</a> · <a asp-action="Edit" asp-route-id="@task.Id">Edit</a> · <a asp-action="Delete" asp-route-id="@task.Id" class="text-danger">Delete</a></td></tr> }
+    </tbody></table></div> }
+</div>

@@ -1,0 +1,16 @@
+@model IReadOnlyList<OnboardingTask>
+@{ ViewData["Title"] = User.IsInRole(AppRoles.NewJoiner) ? "My tasks" : "Onboarding tasks"; }
+<div class="d-flex justify-content-between align-items-center mb-3"><div><h1 class="h2 mb-1">@ViewData["Title"]</h1><p class="text-secondary mb-0">Track each onboarding action and due date.</p></div>@if (User.IsInRole(AppRoles.Hr)) { <a class="btn btn-primary" asp-action="Create">Add task</a> }</div>
+<div class="card">
+@if (Model.Count == 0) { <div class="card-body text-center py-5"><h2 class="h5">No onboarding tasks</h2><p class="text-secondary mb-0">Tasks appear here after a checklist is assigned.</p></div> }
+else { <div class="table-responsive"><table class="table table-hover align-middle mb-0"><thead><tr>@if (!User.IsInRole(AppRoles.NewJoiner)) { <th>Employee</th> }<th>Task</th><th>Category</th><th>Due date</th><th>Status</th><th></th></tr></thead><tbody>
+@foreach (var task in Model) { <tr>
+@if (!User.IsInRole(AppRoles.NewJoiner)) { <td>@task.Employee?.FullName</td> }
+<td><strong>@task.TitleSnapshot</strong><div class="small text-secondary">@task.DescriptionSnapshot</div></td><td>@task.CategorySnapshot</td><td>@(task.DueDate?.ToString("MMM d, yyyy") ?? "—")</td>
+<td><span class="badge @(task.Status == OnboardingTaskStatus.Completed ? "text-bg-success" : task.Status == OnboardingTaskStatus.InProgress ? "text-bg-primary" : "text-bg-secondary")">@task.Status</span></td>
+<td class="text-end text-nowrap">
+    @if (User.IsInRole(AppRoles.Hr)) { <a asp-action="Details" asp-route-id="@task.Id">Details</a><text> · </text><a asp-action="Edit" asp-route-id="@task.Id">Edit</a><text> · </text><a asp-action="Delete" asp-route-id="@task.Id" class="text-danger">Delete</a> }
+    @if (User.IsInRole(AppRoles.NewJoiner) && task.Status != OnboardingTaskStatus.Completed) { <form asp-action="UpdateStatus" asp-route-id="@task.Id" method="post" class="d-inline"><input type="hidden" name="status" value="@(task.Status == OnboardingTaskStatus.NotStarted ? OnboardingTaskStatus.InProgress : OnboardingTaskStatus.Completed)" /><button class="btn btn-sm btn-outline-primary" type="submit">@(task.Status == OnboardingTaskStatus.NotStarted ? "Start" : "Complete")</button></form> }
+</td></tr> }
+</tbody></table></div> }
+</div>

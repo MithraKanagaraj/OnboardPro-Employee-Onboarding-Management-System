@@ -1,0 +1,7 @@
+@model AssetFormViewModel
+<input asp-for="Id" type="hidden" /><div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+<div class="mb-3"><label asp-for="Name" class="form-label"></label><input asp-for="Name" class="form-control" /><span asp-validation-for="Name" class="text-danger"></span></div>
+<div class="row"><div class="col-md-6 mb-3"><label asp-for="Category" class="form-label"></label><input asp-for="Category" class="form-control" /><span asp-validation-for="Category" class="text-danger"></span></div><div class="col-md-6 mb-3"><label asp-for="SerialNumber" class="form-label"></label><input asp-for="SerialNumber" class="form-control" /><span asp-validation-for="SerialNumber" class="text-danger"></span></div></div>
+<div class="mb-3"><label asp-for="Notes" class="form-label"></label><textarea asp-for="Notes" class="form-control"></textarea><span asp-validation-for="Notes" class="text-danger"></span></div>
+<div class="form-check mb-3"><input asp-for="IsRetired" class="form-check-input" /><label asp-for="IsRetired" class="form-check-label"></label></div>
+<button class="btn btn-primary" type="submit">Save asset</button> <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>

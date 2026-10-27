@@ -1,0 +1,11 @@
+@model EmployeeAccountViewModel
+@{ ViewData["Title"] = "Provision employee account"; }
+<h1 class="h2 mb-3">Provision employee account</h1>
+<div class="card"><div class="card-body"><form asp-action="Create" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+    <div class="mb-3"><label asp-for="EmployeeId" class="form-label"></label><select asp-for="EmployeeId" asp-items="Model.Employees" class="form-select"><option value="">Select employee</option></select><span asp-validation-for="EmployeeId" class="text-danger"></span></div>
+    <div class="mb-3"><label asp-for="Password" class="form-label">Temporary password</label><input asp-for="Password" class="form-control" autocomplete="new-password" /><span asp-validation-for="Password" class="text-danger"></span><div class="form-text">Use a temporary password with at least 12 characters, uppercase/lowercase letters, a number, and a symbol. Share it securely.</div></div>
+    <div class="mb-3"><label asp-for="ConfirmPassword" class="form-label"></label><input asp-for="ConfirmPassword" class="form-control" autocomplete="new-password" /><span asp-validation-for="ConfirmPassword" class="text-danger"></span></div>
+    <button class="btn btn-primary" type="submit">Create account</button> <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+</form></div></div>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

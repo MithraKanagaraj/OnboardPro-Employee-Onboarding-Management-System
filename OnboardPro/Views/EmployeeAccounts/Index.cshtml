@@ -1,0 +1,6 @@
+@model IReadOnlyList<Employee>
+@{ ViewData["Title"] = "Employee accounts"; }
+<div class="d-flex justify-content-between align-items-center mb-3"><div><h1 class="h2 mb-1">Employee accounts</h1><p class="text-secondary mb-0">Accounts use ASP.NET Core Identity and inherit the employee's access role.</p></div><a asp-action="Create" class="btn btn-primary">Provision account</a></div>
+<div class="card"><div class="table-responsive"><table class="table table-hover align-middle mb-0"><thead><tr><th>Employee</th><th>Email</th><th>Access role</th><th>Account</th><th></th></tr></thead><tbody>
+@foreach (var employee in Model) { <tr><td>@employee.FullName</td><td>@employee.Email</td><td>@employee.Role.Name</td><td>@(employee.IdentityUserId is null ? "Not provisioned" : "Active")</td><td class="text-end">@if (employee.IdentityUserId is not null) { <form asp-action="Remove" asp-route-id="@employee.Id" method="post" class="d-inline"><button type="submit" class="btn btn-sm btn-outline-danger">Remove account</button></form> }</td></tr> }
+</tbody></table></div></div>

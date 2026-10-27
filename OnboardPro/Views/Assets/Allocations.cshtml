@@ -1,0 +1,9 @@
+@model IReadOnlyList<AssetAllocation>
+@{ ViewData["Title"] = "Asset allocations"; }
+<div class="d-flex justify-content-between align-items-center mb-3"><div><h1 class="h2 mb-1">Asset allocations</h1><p class="text-secondary mb-0">Allocation history is retained when equipment is returned.</p></div><a asp-action="Allocate" class="btn btn-primary">Allocate asset</a></div>
+<div class="card">
+@if (Model.Count == 0) { <div class="card-body text-center py-5"><h2 class="h5">No allocations yet</h2><p class="text-secondary">Allocate an available asset to an employee.</p></div> }
+else { <div class="table-responsive"><table class="table table-hover align-middle mb-0"><thead><tr><th>Employee</th><th>Asset</th><th>Allocated</th><th>Returned</th><th>Notes</th><th></th></tr></thead><tbody>
+@foreach (var allocation in Model) { <tr><td>@allocation.Employee.FullName</td><td>@allocation.Asset.Name <span class="small text-secondary">(@allocation.Asset.SerialNumber)</span></td><td>@allocation.AllocatedOn.ToString("MMM d, yyyy")</td><td>@(allocation.ReturnedOn?.ToString("MMM d, yyyy") ?? "Not returned")</td><td>@allocation.Notes</td><td class="text-end text-nowrap"><a asp-action="EditAllocation" asp-route-id="@allocation.Id">Edit / return</a> · <a asp-action="DeleteAllocation" asp-route-id="@allocation.Id" class="text-danger">Delete</a></td></tr> }
+</tbody></table></div> }
+</div>

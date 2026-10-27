@@ -1,0 +1,5 @@
+@model BuddyAssignment
+@{ ViewData["Title"] = "Buddy assignment details"; var total = Model.Employee.OnboardingTasks.Count; var completed = Model.Employee.OnboardingTasks.Count(task => task.Status == OnboardingTaskStatus.Completed); }
+<h1 class="h2 mb-3">Buddy assignment details</h1>
+<div class="card mb-3"><dl class="row card-body mb-0"><dt class="col-sm-3">New joiner</dt><dd class="col-sm-9">@Model.Employee.FullName</dd><dt class="col-sm-3">Buddy</dt><dd class="col-sm-9">@Model.BuddyEmployee.FullName</dd><dt class="col-sm-3">Assigned</dt><dd class="col-sm-9">@Model.AssignedOn</dd><dt class="col-sm-3">Ended</dt><dd class="col-sm-9">@(Model.EndedOn?.ToString() ?? "Active")</dd><dt class="col-sm-3">Task progress</dt><dd class="col-sm-9">@completed / @total</dd></dl></div>
+<a asp-controller="OnboardingTasks" asp-action="Index" class="btn btn-primary">View onboarding tasks</a> <a asp-action="Index" class="btn btn-outline-secondary">Back</a>

@@ -1,0 +1,5 @@
+@model TaskDefinition
+@{ ViewData["Title"] = "Delete task definition"; }
+<h1 class="h2">Delete task definition</h1><div class="alert alert-warning">A task definition used by a checklist template cannot be deleted.</div>
+<div class="card mb-3"><div class="card-body"><strong>@Model.Title</strong><div class="text-secondary">@Model.Category</div></div></div>
+<form asp-action="Delete" asp-route-id="@Model.Id" method="post"><button class="btn btn-danger" type="submit">Delete</button> <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a></form>

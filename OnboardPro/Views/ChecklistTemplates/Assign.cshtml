@@ -1,0 +1,11 @@
+@{ ViewData["Title"] = "Assign checklist"; }
+<h1 class="h2 mb-3">Assign checklist template</h1>
+<div class="card"><div class="card-body">
+<p class="text-secondary">Tasks are copied from the template into employee-specific records. Later template edits will not change assigned tasks.</p>
+<form asp-action="Assign" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+    <div class="mb-3"><label class="form-label" for="employeeId">Employee</label><select class="form-select" id="employeeId" name="employeeId" asp-items="ViewBag.Employees"><option value="">Select employee</option></select></div>
+    <div class="mb-3"><label class="form-label" for="templateId">Active template (matching access role)</label><select class="form-select" id="templateId" name="templateId" asp-items="ViewBag.Templates"><option value="">Select template</option></select></div>
+    <button class="btn btn-primary" type="submit">Assign checklist</button> <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+</form>
+</div></div>

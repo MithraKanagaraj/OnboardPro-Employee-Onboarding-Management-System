@@ -1,0 +1,5 @@
+@model TaskDefinitionFormViewModel
+@{ ViewData["Title"] = "Edit task definition"; }
+<h1 class="h2 mb-3">Edit task definition</h1><div class="card"><div class="card-body"><form asp-action="Edit" asp-route-id="@Model.Id" method="post"><partial name="_Form" model="Model" /></form></div></div>
+<p class="small text-secondary mt-2">Existing employee task instances keep their original snapshot values.</p>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

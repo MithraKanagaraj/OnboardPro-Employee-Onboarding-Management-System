@@ -1,0 +1,5 @@
+@model Asset
+@{ ViewData["Title"] = "Delete asset"; }
+<h1 class="h2">Delete asset</h1><div class="alert alert-warning">Assets with allocation history cannot be deleted. Retire them instead.</div>
+<p>Delete <strong>@Model.Name</strong> (serial @Model.SerialNumber)?</p>
+<form asp-action="Delete" asp-route-id="@Model.Id" method="post"><button class="btn btn-danger" type="submit">Delete asset</button> <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a></form>

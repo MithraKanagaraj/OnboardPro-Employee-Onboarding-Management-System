@@ -1,0 +1,4 @@
+@model AssetAllocation
+@{ ViewData["Title"] = "Delete allocation"; }
+<h1 class="h2">Delete allocation record</h1><div class="alert alert-warning">This removes the historical record from the system.</div><p>@Model.Asset.Name allocated to @Model.Employee.FullName on @Model.AllocatedOn.</p>
+<form asp-action="DeleteAllocation" asp-route-id="@Model.Id" method="post"><button class="btn btn-danger" type="submit">Delete allocation</button> <a asp-action="Allocations" class="btn btn-outline-secondary">Cancel</a></form>

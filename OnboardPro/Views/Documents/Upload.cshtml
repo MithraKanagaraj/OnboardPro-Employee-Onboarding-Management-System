@@ -1,0 +1,13 @@
+@model DocumentUploadViewModel
+@{ ViewData["Title"] = "Upload document"; }
+<h1 class="h2 mb-3">Upload a document</h1>
+<div class="card"><div class="card-body">
+<p class="text-secondary">Accepted formats: PDF, PNG, and JPEG. Maximum size: 10 MB.</p>
+<form asp-action="Upload" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+    <div class="mb-3"><label asp-for="DocumentType" class="form-label"></label><input asp-for="DocumentType" class="form-control" placeholder="e.g. Proof of identity" /><span asp-validation-for="DocumentType" class="text-danger"></span></div>
+    <div class="mb-3"><label asp-for="File" class="form-label"></label><input asp-for="File" class="form-control" accept=".pdf,.png,.jpg,.jpeg" /><span asp-validation-for="File" class="text-danger"></span></div>
+    <button class="btn btn-primary" type="submit">Upload for review</button> <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+</form>
+</div></div>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

@@ -1,0 +1,4 @@
+@model OnboardingTask
+@{ ViewData["Title"] = "Delete onboarding task"; }
+<h1 class="h2">Delete onboarding task</h1><p>Delete <strong>@Model.TitleSnapshot</strong> for @Model.Employee?.FullName?</p>
+<form asp-action="Delete" asp-route-id="@Model.Id" method="post"><button class="btn btn-danger" type="submit">Delete task</button> <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a></form>

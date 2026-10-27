@@ -1,0 +1,4 @@
+@model TaskDefinition
+@{ ViewData["Title"] = "Task definition details"; }
+<h1 class="h2">Task definition</h1><div class="card"><dl class="row card-body mb-0"><dt class="col-sm-3">Title</dt><dd class="col-sm-9">@Model.Title</dd><dt class="col-sm-3">Description</dt><dd class="col-sm-9">@Model.Description</dd><dt class="col-sm-3">Category</dt><dd class="col-sm-9">@Model.Category</dd><dt class="col-sm-3">Due offset</dt><dd class="col-sm-9">@Model.DueOffsetDays days</dd><dt class="col-sm-3">Required</dt><dd class="col-sm-9">@(Model.IsRequired ? "Yes" : "No")</dd></dl></div>
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary mt-3">Edit</a> <a asp-action="Index" class="btn btn-outline-secondary mt-3">Back</a>

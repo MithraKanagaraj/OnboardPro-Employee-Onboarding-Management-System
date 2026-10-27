@@ -1,0 +1,4 @@
+@model AssetAllocationFormViewModel
+@{ ViewData["Title"] = "Edit asset allocation"; }
+<h1 class="h2 mb-3">Edit / return asset</h1><div class="card"><div class="card-body"><form asp-action="EditAllocation" asp-route-id="@Model.Id" method="post"><partial name="_AllocationForm" model="Model" /></form></div></div>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

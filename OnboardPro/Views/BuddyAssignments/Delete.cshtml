@@ -1,0 +1,4 @@
+@model BuddyAssignment
+@{ ViewData["Title"] = "Delete buddy assignment"; }
+<h1 class="h2">Delete buddy assignment</h1><p>Remove the pairing between <strong>@Model.Employee.FullName</strong> and <strong>@Model.BuddyEmployee.FullName</strong>?</p>
+<form asp-action="Delete" asp-route-id="@Model.Id" method="post"><button class="btn btn-danger" type="submit">Delete assignment</button> <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a></form>

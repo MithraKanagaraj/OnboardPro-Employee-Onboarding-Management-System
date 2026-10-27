@@ -1,0 +1,4 @@
+@model ChecklistTemplate
+@{ ViewData["Title"] = "Delete template"; }
+<h1 class="h2">Delete checklist template</h1><div class="alert alert-warning">Templates assigned to employees cannot be deleted.</div><div class="card mb-3"><div class="card-body"><strong>@Model.Name</strong><div>@Model.Description</div></div></div>
+<form asp-action="Delete" asp-route-id="@Model.Id" method="post"><button type="submit" class="btn btn-danger">Delete template</button> <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a></form>

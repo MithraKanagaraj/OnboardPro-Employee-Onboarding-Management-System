@@ -1,0 +1,9 @@
+@model IReadOnlyList<Asset>
+@{ ViewData["Title"] = "Asset inventory"; }
+<div class="d-flex justify-content-between align-items-center mb-3"><div><h1 class="h2 mb-1">Asset inventory</h1><p class="text-secondary mb-0">Track equipment and current availability.</p></div><div><a asp-action="Allocations" class="btn btn-outline-primary">View allocations</a> <a asp-action="Create" class="btn btn-primary">Add asset</a></div></div>
+<div class="card">
+@if (Model.Count == 0) { <div class="card-body text-center py-5"><h2 class="h5">No assets in inventory</h2><p class="text-secondary">Add laptops, monitors, or other equipment.</p></div> }
+else { <div class="table-responsive"><table class="table table-hover align-middle mb-0"><thead><tr><th>Asset</th><th>Category</th><th>Serial</th><th>Allocation</th><th>Status</th><th></th></tr></thead><tbody>
+@foreach (var asset in Model) { var active = asset.Allocations.FirstOrDefault(allocation => allocation.ReturnedOn is null); <tr><td><strong>@asset.Name</strong><div class="small text-secondary">@asset.Notes</div></td><td>@asset.Category</td><td>@asset.SerialNumber</td><td>@(active?.Employee?.FullName ?? "Available")</td><td>@(asset.IsRetired ? "Retired" : active is null ? "Available" : "Allocated")</td><td class="text-end text-nowrap"><a asp-action="Details" asp-route-id="@asset.Id">Details</a> · <a asp-action="Edit" asp-route-id="@asset.Id">Edit</a> · <a asp-action="Delete" asp-route-id="@asset.Id" class="text-danger">Delete</a></td></tr> }
+</tbody></table></div> }
+</div>

@@ -1,0 +1,73 @@
+﻿@model DashboardViewModel
+@{
+    ViewData["Title"] = "Onboarding dashboard";
+}
+
+<div class="d-flex flex-wrap justify-content-between align-items-end mb-4">
+    <div>
+        <p class="text-primary text-uppercase fw-semibold small mb-1">OnboardPro overview</p>
+        <h1 class="h2 mb-1">Onboarding dashboard</h1>
+        <p class="text-secondary mb-0">Track progress, open tasks, document reviews, and available equipment.</p>
+    </div>
+    @if (User.IsInRole(AppRoles.Hr))
+    {
+        <a class="btn btn-primary mt-3" asp-controller="Employees" asp-action="Create">Add employee</a>
+    }
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-sm-6 col-xl-3"><div class="card h-100"><div class="card-body"><div class="text-secondary small">Employees in view</div><div class="display-6 fw-semibold">@Model.EmployeeCount</div></div></div></div>
+    <div class="col-sm-6 col-xl-3"><div class="card h-100"><div class="card-body"><div class="text-secondary small">Tasks to complete</div><div class="display-6 fw-semibold">@Model.IncompleteTaskCount</div></div></div></div>
+    @if (User.IsInRole(AppRoles.Hr))
+    {
+        <div class="col-sm-6 col-xl-3"><div class="card h-100"><div class="card-body"><div class="text-secondary small">Documents awaiting review</div><div class="display-6 fw-semibold">@Model.PendingDocumentCount</div><a asp-controller="Documents" asp-action="Index" class="small">Review documents</a></div></div></div>
+    }
+    @if (User.IsInRole(AppRoles.ItAdmin))
+    {
+        <div class="col-sm-6 col-xl-3"><div class="card h-100"><div class="card-body"><div class="text-secondary small">Assets available</div><div class="display-6 fw-semibold">@Model.AvailableAssetCount</div><a asp-controller="Assets" asp-action="Index" class="small">Manage inventory</a></div></div></div>
+    }
+</div>
+
+<div class="card">
+    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+        <h2 class="h5 mb-0">Onboarding progress</h2>
+        @if (User.IsInRole(AppRoles.Hr))
+        {
+            <a asp-controller="ChecklistTemplates" asp-action="Assign" class="btn btn-sm btn-outline-primary">Assign checklist</a>
+        }
+    </div>
+    @if (Model.Employees.Count == 0)
+    {
+        <div class="card-body text-center py-5">
+            <h3 class="h6">No employees in this view yet</h3>
+            <p class="text-secondary mb-0">Employee onboarding progress will appear here as checklists are assigned.</p>
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table align-middle mb-0">
+                <thead><tr><th>Employee</th><th>Role</th><th>Start date</th><th style="min-width: 220px">Progress</th><th class="text-end">Tasks</th></tr></thead>
+                <tbody>
+                @foreach (var employee in Model.Employees)
+                {
+                    <tr>
+                        <td class="fw-semibold">@employee.Name</td>
+                        <td>@employee.JobTitle</td>
+                        <td>@employee.StartDate.ToString("MMM d, yyyy")</td>
+                        <td>
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="progress flex-grow-1" role="progressbar" aria-valuenow="@employee.ProgressPercent" aria-valuemin="0" aria-valuemax="100">
+                                    <div class="progress-bar" style="width: @employee.ProgressPercent%"></div>
+                                </div>
+                                <span class="small text-secondary">@employee.ProgressPercent%</span>
+                            </div>
+                        </td>
+                        <td class="text-end">@employee.CompletedTasks / @employee.TotalTasks</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
